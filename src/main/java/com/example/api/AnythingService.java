@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.service.annotation.PostExchange;
+import reactor.core.publisher.Mono;
 
 @HttpExchange("/anything")
 public interface AnythingService {
@@ -45,6 +46,25 @@ public interface AnythingService {
 
     @PostExchange
     ResponseEntity<AnythingResponseDto> postJson(
+            @RequestBody AnythingRequestDto anythingRequestDto
+    );
+
+    @GetExchange
+    Mono<ResponseEntity<AnythingResponseDto>> asyncGet(
+            @RequestParam("param1") String param1,
+            @RequestParam("param2") String param2
+    );
+
+    @PostExchange(
+            contentType = MediaType.APPLICATION_FORM_URLENCODED_VALUE
+    )
+    Mono<ResponseEntity<AnythingResponseDto>> asyncPostForm(
+            @RequestParam("param1") String param1,
+            @RequestParam("param2") String param2
+    );
+
+    @PostExchange
+    Mono<ResponseEntity<AnythingResponseDto>> asyncPostJson(
             @RequestBody AnythingRequestDto anythingRequestDto
     );
 

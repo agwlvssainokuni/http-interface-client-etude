@@ -55,6 +55,24 @@ public class Runner implements ApplicationRunner {
                         List.of("ITEM1", "ITEM2", "ITEM3")
                 )
         ));
+
+        logger.info("async GET {}", anythingService.asyncGet(
+                "ABCDE",
+                "FGHIJ"
+        ).block());
+
+        logger.info("async POST(form) {}", anythingService.asyncPostForm(
+                "ABCDE",
+                "FGHIJ"
+        ).block());
+
+        logger.info("async POST(json) {}", anythingService.asyncPostJson(
+                new AnythingRequestDto(
+                        1001L,
+                        "NAME",
+                        List.of("ITEM1", "ITEM2", "ITEM3")
+                )
+        ).block());
     }
 
 }

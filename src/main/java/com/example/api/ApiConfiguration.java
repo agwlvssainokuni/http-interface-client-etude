@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example;
+package com.example.api;
 
 import com.example.api.AnythingService;
 import org.springframework.context.annotation.Bean;

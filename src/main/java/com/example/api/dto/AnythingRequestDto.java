@@ -18,6 +18,13 @@ package com.example.api.dto;
 
 import java.util.List;
 
+/**
+ * httpbin.org の /anything エンドポイントへのリクエストDTO。
+ *
+ * @param id   ID
+ * @param name 名前
+ * @param item アイテムリスト
+ */
 public record AnythingRequestDto(
         long id,
         String name,

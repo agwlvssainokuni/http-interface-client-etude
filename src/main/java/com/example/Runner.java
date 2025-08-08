@@ -26,16 +26,33 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * HTTP Interface Clientの動作確認を行うランナークラス。
+ *
+ * <p>アプリケーション起動時に自動実行され、AnythingServiceを使用して
+ * 同期・非同期のHTTP通信パターンをテストします。</p>
+ */
 @Component
 public class Runner implements ApplicationRunner {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final AnythingService anythingService;
 
+    /**
+     * コンストラクタ。
+     *
+     * @param anythingService HTTP通信を行うサービス
+     */
     public Runner(AnythingService anythingService) {
         this.anythingService = anythingService;
     }
 
+    /**
+     * アプリケーション起動時に実行されるメソッド。
+     * 各種HTTP通信パターン（同期・非同期、GET・POST、Form・JSON）をテストします。
+     *
+     * @param args アプリケーション起動時の引数
+     */
     public void run(ApplicationArguments args) {
 
         logger.info("GET {}", anythingService.get(

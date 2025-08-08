@@ -27,15 +27,35 @@ import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.service.annotation.PostExchange;
 import reactor.core.publisher.Mono;
 
+/**
+ * httpbin.orgの/anythingエンドポイントとの通信を行うサービスインターフェース。
+ *
+ * <p>HTTP Interfaceを使用して宣言的にHTTP通信を行います。
+ * 同期・非同期、GET・POST、Form・JSONの各パターンに対応しています。</p>
+ */
 @HttpExchange("/anything")
 public interface AnythingService {
 
+    /**
+     * 同期GETリクエストを実行します。
+     *
+     * @param param1 クエリパラメータ1
+     * @param param2 クエリパラメータ2
+     * @return レスポンス
+     */
     @GetExchange
     ResponseEntity<AnythingResponseDto> get(
             @RequestParam("param1") String param1,
             @RequestParam("param2") String param2
     );
 
+    /**
+     * 同期POSTリクエスト（Form URL-encoded）を実行します。
+     *
+     * @param param1 フォームパラメータ1
+     * @param param2 フォームパラメータ2
+     * @return レスポンス
+     */
     @PostExchange(
             contentType = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
@@ -44,17 +64,37 @@ public interface AnythingService {
             @RequestParam("param2") String param2
     );
 
+    /**
+     * 同期POSTリクエスト（JSON）を実行します。
+     *
+     * @param anythingRequestDto リクエストボディ
+     * @return レスポンス
+     */
     @PostExchange
     ResponseEntity<AnythingResponseDto> postJson(
             @RequestBody AnythingRequestDto anythingRequestDto
     );
 
+    /**
+     * 非同期GETリクエストを実行します。
+     *
+     * @param param1 クエリパラメータ1
+     * @param param2 クエリパラメータ2
+     * @return レスポンスのMono
+     */
     @GetExchange
     Mono<ResponseEntity<AnythingResponseDto>> asyncGet(
             @RequestParam("param1") String param1,
             @RequestParam("param2") String param2
     );
 
+    /**
+     * 非同期POSTリクエスト（Form URL-encoded）を実行します。
+     *
+     * @param param1 フォームパラメータ1
+     * @param param2 フォームパラメータ2
+     * @return レスポンスのMono
+     */
     @PostExchange(
             contentType = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
@@ -63,6 +103,12 @@ public interface AnythingService {
             @RequestParam("param2") String param2
     );
 
+    /**
+     * 非同期POSTリクエスト（JSON）を実行します。
+     *
+     * @param anythingRequestDto リクエストボディ
+     * @return レスポンスのMono
+     */
     @PostExchange
     Mono<ResponseEntity<AnythingResponseDto>> asyncPostJson(
             @RequestBody AnythingRequestDto anythingRequestDto

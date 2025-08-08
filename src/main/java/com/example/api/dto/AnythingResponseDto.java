@@ -18,6 +18,19 @@ package com.example.api.dto;
 
 import java.util.Map;
 
+/**
+ * httpbin.org の /anything エンドポイントからのレスポンスDTO。
+ *
+ * @param args    クエリパラメータ
+ * @param data    リクエストボディの文字列
+ * @param files   アップロードされたファイル
+ * @param form    フォームデータ
+ * @param headers HTTPヘッダー
+ * @param json    JSONデータ
+ * @param method  HTTPメソッド
+ * @param origin  リクエスト元のIPアドレス
+ * @param url     リクエストURL
+ */
 public record AnythingResponseDto(
         Map<String, String> args,
         String data,

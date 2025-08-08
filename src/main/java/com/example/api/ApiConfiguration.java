@@ -21,9 +21,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
+/**
+ * API関連サービスの設定クラス。
+ *
+ * <p>HTTP Interfaceを使用したAPIサービスのBean定義を行います。</p>
+ */
 @Configuration
 public class ApiConfiguration {
 
+    /**
+     * AnythingServiceのBean定義。
+     *
+     * @param httpServiceProxyFactory HTTP Interfaceプロキシを生成するファクトリ
+     * @return AnythingServiceのプロキシインスタンス
+     */
     @Bean
     public AnythingService anythingService(HttpServiceProxyFactory httpServiceProxyFactory) {
         return httpServiceProxyFactory.createClient(AnythingService.class);

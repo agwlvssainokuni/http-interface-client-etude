@@ -23,14 +23,31 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
+/**
+ * WebClientとHTTP Service Proxy Factoryの設定クラス。
+ *
+ * <p>HTTP Interface機能で使用するWebClientとHttpServiceProxyFactoryのBean定義を行います。</p>
+ */
 @Configuration
 public class WebClientConfiguration {
 
+    /**
+     * WebClientのBean定義。
+     *
+     * @param baseUri バックエンドサービスのベースURI
+     * @return 設定済みのWebClientインスタンス
+     */
     @Bean
     public WebClient webClient(@Value("${backend.uri}") String baseUri) {
         return WebClient.builder().baseUrl(baseUri).build();
     }
 
+    /**
+     * HttpServiceProxyFactoryのBean定義。
+     *
+     * @param webClient HTTP通信に使用するWebClient
+     * @return 設定済みのHttpServiceProxyFactoryインスタンス
+     */
     @Bean
     public HttpServiceProxyFactory httpServiceProxyFactory(WebClient webClient) {
         WebClientAdapter adapter = WebClientAdapter.create(webClient);

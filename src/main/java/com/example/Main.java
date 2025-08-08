@@ -19,13 +19,30 @@ package com.example;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * HTTP Interface Clientの練習用メインクラス。
+ *
+ * <p>Spring Bootアプリケーションとして起動し、HTTP Interface機能を使用して
+ * 外部APIとの通信を行うサンプルコードを実行します。</p>
+ */
 @SpringBootApplication
 public class Main {
 
+    /**
+     * アプリケーションのエントリーポイント。
+     *
+     * @param args コマンドライン引数
+     */
     public static void main(String[] args) {
         System.exit(doMain(args));
     }
 
+    /**
+     * Spring Bootアプリケーションを起動し、実行後に終了コードを返します。
+     *
+     * @param args コマンドライン引数
+     * @return アプリケーションの終了コード
+     */
     public static int doMain(String[] args) {
         try (var app = SpringApplication.run(Main.class, args)) {
             return SpringApplication.exit(app);
